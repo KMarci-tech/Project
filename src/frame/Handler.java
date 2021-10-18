@@ -3,6 +3,11 @@ package frame;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+
+
+import objects.Block;
+import window.Game;
+
 public class Handler {
 	
 	public LinkedList<GameObject> object = new LinkedList<GameObject>();
@@ -37,6 +42,21 @@ public class Handler {
 	
 	public void removeObject(GameObject object) {
 		this.object.remove(object);
+	}
+	
+	public void createLevel() {
+		
+		for(int yy = 0; yy < Game.HEIGHT+32; yy += 32) {
+			addObject(new Block(0,yy,ObjectId.Block));
+		}
+				
+		for(int xx = 0; xx < Game.WIDTH*2; xx += 32) {
+			addObject(new Block(xx,Game.HEIGHT-32,ObjectId.Block));
+		}
+		
+		for(int xx = 200; xx < 600; xx += 32) {
+			addObject(new Block(xx,400,ObjectId.Block));
+		}
 	}
 	
 	

@@ -5,9 +5,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import frame.KeyInput;
+
 import frame.Handler;
 import frame.ObjectId;
-import objects.Test;
+import objects.Player;
+
 
 public class Game extends Canvas implements Runnable{
 
@@ -15,6 +18,8 @@ public class Game extends Canvas implements Runnable{
 	private final double updateRate = 1.0d/60.0d;
 	private Thread thread;
 	
+	
+	public static int WIDTH, HEIGHT;
 	
 	private long nextStatTime;
 	private int ups = 0; // update per seconds
@@ -27,10 +32,14 @@ public class Game extends Canvas implements Runnable{
 	
 	private void init() {
 		
+		WIDTH = getWidth();
+		HEIGHT = getHeight();
+		
 		handler = new Handler();
+		handler.addObject(new Player(100,100,handler,ObjectId.Player));
 		
-		handler.addObject(new Test(200,200,ObjectId.Test));
-		
+		handler.createLevel();
+		this.addKeyListener(new KeyInput(handler));
 	}
 	
 	
